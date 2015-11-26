@@ -1,0 +1,168 @@
+<!--
+Copyright [2015] [muto]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<project default="build">
+
+    <!-- 引入配置文件 -->
+    <property file="build.properties"/>
+
+    <!-- 项目名称 -->
+    <property name="project.name" value="${cfg.project.name}"/>
+    <!-- webroot目录 -->
+    <property name="project.webroot" value="${cfg.project.webroot}"/>
+    <!-- build类型 -->
+    <property name="build.type" value="${cfg.build.type}"/>
+    <!-- 编码类型 -->
+    <property name="build.encoding" value="${cfg.build.encoding}"/>
+    <!-- tomcat目录 -->
+    <property name="build.tomcat" value="${cfg.build.tomcat}"/>
+    <!-- 输出目录 -->
+    <property name="build.output" value="${cfg.build.output}"/>
+
+    <!-- 生成日志文件 -->
+    <mkdir dir="${build.output}"/>
+    <record name="${build.output}/build.log"/>
+
+    <!-- 编译所需jar -->
+    <path id="classpath">
+        <fileset dir="${project.webroot}/WEB-INF/lib"/>
+        <fileset dir="${build.tomcat}/lib">
+            <include name="jsp-api.jar"/>
+            <include name="servlet-api.jar"/>
+        </fileset>
+    </path>
+
+    <!-- bootstrap -->
+    <target name="build">
+        <echo message="build type: ${build.type}"/>
+        <taskdef resource="net/sf/antcontrib/antcontrib.properties"
+                 classpath="ant-contrib-1.0b3.jar"/>
+        <loadfile property="deleteFileList" srcFile="delete_file_list.txt"/>
+        <loadfile property="deployFileList" srcFile="deploy_file_list.txt"/>
+        <propertyregex property="deleteFileList" input="${deleteFileList}"
+                       regexp="\r\n" replace="," override="yes"/>
+        <propertyregex property="deployFileList" input="${deployFileList}"
+                       regexp="\r\n" replace="," override="yes"/>
+        <echo message="deleteFileList: ${deleteFileList}"/>
+        <echo message="deployFileList: ${deployFileList}"/>
+        <antcall>
+            <target name="${build.type}"/>
+        </antcall>
+    </target>
+
+    <!-- 增量build -->
+    <target name="incremental">
+        <antcall target="init"/>
+        <antcall target="construct"/>
+        <antcall target="compile"/>
+        <antcall target="war"/>
+        <antcall target="rename"/>
+        <antcall target="clean"/>
+    </target>
+
+    <!-- 增量包更名，添加tar后缀 -->
+    <target name="rename">
+        <echo message="rename war to war.tar"/>
+        <rename dest="${build.output}/${project.name}.war.tar"
+                src="${build.output}/${project.name}.war"/>
+    </target>
+
+    <!-- 组织打包结构 -->
+    <target name="construct">
+        <echo message="delete files not in deploy"/>
+        <delete dir="${build.output}" includes="src/**,${project.webroot}/**"
+                excludes="${deployFileList}" includeemptydirs="true"/>
+    </target>
+
+    <!-- 全量build -->
+    <target name="full">
+        <antcall target="init"/>
+        <antcall target="compile"/>
+        <antcall target="war"/>
+        <antcall target="clean"/>
+    </target>
+
+    <!-- 删除临时文件 -->
+    <target name="clean">
+        <echo message="clean temporary"/>
+        <delete dir="${build.output}/src"/>
+        <delete dir="${build.output}/classtemp"/>
+        <delete dir="${build.output}/${project.webroot}"/>
+    </target>
+
+    <!-- 生成war包 -->
+    <target name="war">
+        <if>
+            <available file="${build.output}/${project.webroot}"/>
+            <then>
+                <echo message="generate war"/>
+                <jar destfile="${build.output}/${project.name}.war"
+                     basedir="${build.output}/${project.webroot}"/>
+            </then>
+            <else>
+                <echo message="no files to pack"/>
+            </else>
+        </if>
+    </target>
+
+    <!-- 编译java文件 -->
+    <target name="compile">
+        <if>
+            <available file="${build.output}/src"/>
+            <then>
+                <echo message="copy src exclude java files"/>
+                <copy todir="${build.output}/${project.webroot}/WEB-INF/classes">
+                    <fileset dir="${build.output}/src" excludes="**/*.java"/>
+                </copy>
+
+                <echo message="create classtemp"/>
+                <javac classpathref="classpath" encoding="${build.encoding}"
+                       srcdir="src" destdir="${build.output}/classtemp"/>
+
+                <echo message="compile java files"/>
+                <javac destdir="${build.output}/${project.webroot}/WEB-INF/classes"
+                       srcdir="${build.output}/src" encoding="${build.encoding}">
+                    <classpath refid="classpath"/>
+                    <classpath path="${build.output}/classtemp"/>
+                </javac>
+            </then>
+            <else>
+                <echo message="no files to compile"/>
+            </else>
+        </if>
+    </target>
+
+    <!-- 初始化 -->
+    <target name="init">
+        <echo message="project name: ${project.name}"/>
+        <echo message="java version: ${ant.java.version}"/>
+        <delete dir="${build.output}" includes="*.war.*"/>
+        <mkdir dir="${build.output}/classtemp"/>
+
+        <echo message="copy src"/>
+        <copy todir="${build.output}/src">
+            <fileset dir="src" includes="**/*.*"/>
+        </copy>
+
+        <echo message="copy web dir exclude classes"/>
+        <copy todir="${build.output}/${project.webroot}">
+            <fileset dir="${project.webroot}">
+                <exclude name="META-INF/*.*"/>
+                <exclude name="WEB-INF/classes/*.*"/>
+            </fileset>
+        </copy>
+    </target>
+
+</project>
