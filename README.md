@@ -2,8 +2,7 @@
 build.xml想必大家对这东西并不陌生。在这个build.xml诞生之前，笔者都是全量build，为此也受到了不少的伤害。
 那时候啊笔者是迫的需要一个能增量打包的工具，于是百度、Google翻查各种资料，终于在2015-11-26这一天该项目奇葩的诞生了。
 
-	<s>黑历史：测试期间笔者用自己的一个项目作为实验材料，结果整个项目都被吞掉了</s> QAQ
-	雾：幸好有svn，可惜是一个星期前的XD
+	黑历史：测试期间笔者用自己的一个项目作为实验材料，结果整个项目都被吞掉了 QAQ
 
 ## 项目说明
 1. 整个项目也就5个文件，分别是：
@@ -33,21 +32,22 @@ build.xml想必大家对这东西并不陌生。在这个build.xml诞生之前�
 ## 常见问题
 1. 有些童鞋喜欢吧jar放到lib（WEB-INF/lib）中（强迫症的童鞋注意了，前方高能反应）。
    笔者之所以不放入配置文件，是因为不推荐这么做（其实懒得这么弄了XD）。
+   
    修改方法：
-   >	在build.xml中找到buildtarget，修改taskdef的属性classpath即可。
+	> 在build.xml中找到buildtarget，修改taskdef的属性classpath即可。
 
 ## License
 
-Copyright [2015] [muto]
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+> Copyright [2015] [muto]
+> 
+> Licensed under the Apache License, Version 2.0 (the "License");
+> you may not use this file except in compliance with the License.
+> You may obtain a copy of the License at
+> 
+    > http://www.apache.org/licenses/LICENSE-2.0
+> 
+> Unless required by applicable law or agreed to in writing, software
+> distributed under the License is distributed on an "AS IS" BASIS,
+> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+> See the License for the specific language governing permissions and
+> limitations under the License.
