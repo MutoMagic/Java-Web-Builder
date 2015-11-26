@@ -31,8 +31,7 @@
 ## 常见问题
 1. 有些童鞋喜欢吧jar放到lib（WEB-INF/lib）中（强迫症的童鞋注意了，前方高能反应）。笔者之所以不放入配置文件，是因为不推荐这么做。
    
-> 修改方法：
-> 在build.xml中找到buildtarget，修改taskdef的属性classpath即可。
+	修改方法：在build.xml中找到buildtarget，修改taskdef的属性classpath即可。
 
 ## License
 
