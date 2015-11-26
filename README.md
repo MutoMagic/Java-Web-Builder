@@ -1,9 +1,9 @@
 # Java-Web-Builder
-build.xml想必大家对这东西并不陌生。在这个build.xml诞生之前，笔者都是全量build，为此也受到了不少的伤害。那时候啊笔者是迫的需要一个能增量打包的工具，于是百度、Google翻查各种资料，终于在2015-11-26这一天该项目奇葩的诞生了。 </br>
-<s>黑历史：测试期间笔者用自己的一个项目作为实验材料，结果整个项目都被吞掉了QAQ（雾：幸好有svn，可惜是一个星期前的XD）</s>
+<p>build.xml想必大家对这东西并不陌生。在这个build.xml诞生之前，笔者都是全量build，为此也受到了不少的伤害。那时候啊笔者是迫的需要一个能增量打包的工具，于是百度、Google翻查各种资料，终于在2015-11-26这一天该项目奇葩的诞生了。</p>
+<p><s>黑历史：测试期间笔者用自己的一个项目作为实验材料，结果整个项目都被吞掉了</s>QAQ（雾：幸好有svn，可惜是一个星期前的XD）</p>
 
 # 项目说明
-1.整个项目也就5个文件，分别是 </br>
+<p>1.整个项目也就5个文件，分别是</p>
   ant-contrib-1.0b3.jar   一个灰常好用的Ant拓展包，详见 http://ant-contrib.sourceforge.net/ </br>
               build.xml   Ant的构建文件，详见 http://ant.apache.org/ </br>
        build.properties   build配置文件 </br>
