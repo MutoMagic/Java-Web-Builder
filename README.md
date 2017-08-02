@@ -5,7 +5,7 @@
 > 黑历史：测试期间笔者用自己的一个项目作为实验材料，结果整个项目都被吞掉了 QAQ
 
 ## 项目说明
-1. 整个项目也就5个文件，分别是：
+1.  整个项目也就5个文件，分别是：
     
     name         | discription
     ------------ | -------------
@@ -15,14 +15,14 @@
     delete\_file\_list.txt | 需要删除的文件列表（当前版本中并无卵用）
     deploy\_file\_list.txt | 需要部署的文件列表，与增量编译有关
     
-2. 笔者的Ant版本：Apache Ant(TM) version 1.9.6 compiled on June 29 2015
+2.  笔者的Ant版本：Apache Ant(TM) version 1.9.6 compiled on June 29 2015
 
-3. 笔者的JDK版本：1.7.0_80
+3.  笔者的JDK版本：1.7.0_80
 
 ## How to use
-1. 将5个文件放到你自己项目的根目录
+1.  将5个文件放到你自己项目的根目录
 
-2. 设置build.properties，这东西一次修改，到处调试(雾)。有关build.properties的配置这里说明一下：
+2.  设置build.properties，这东西一次修改，到处调试(雾)。有关build.properties的配置这里说明一下：
 
     name         | discription
     ------------ | -------------
@@ -35,16 +35,15 @@
     
     注意：目录什么的推荐使用绝对路径，以避免不必要的问题。如果你觉得自己有充足的把握，相对路径（默认为项目的根目录）是你最好的选择。
 
-3. 编写 *\_file_list.txt 把需要编译的文件及其路径写入此文件
+3.  编写 *\_file_list.txt 把需要编译的文件及其路径写入此文件
 
-    src/package/fileName.java  
-    webRoot/fileName.jsp
+    - src/package/fileName.java
+    - webRoot/fileName.jsp
 
-4. 运行Ant Build
+4.  运行Ant Build
   
 ## 常见问题
-1. 有些童鞋喜欢吧jar放到lib(WEB-INF/lib)中（强迫症的童鞋注意了，前方高能反应）。笔者之所以不放入配置文件，是因为不推荐这么做。
+1. 有些童鞋喜欢吧jar放到lib(WEB-INF/lib)中（强迫症的童鞋注意了，前方高能反应），具体修改方式如下：
 
-    修改方法：
     - 在build.xml中寻找名称为build的target
     - 修改taskdef的classpath属性为jar文件路径
