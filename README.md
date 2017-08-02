@@ -35,7 +35,7 @@
     
     注意：目录什么的推荐使用绝对路径，以避免不必要的问题。如果你觉得自己有充足的把握，相对路径（默认为项目的根目录）是你最好的选择。
 
-3.  编写 *\_file_list.txt 把需要编译的文件及其路径写入此文件
+3.  编写 \*\_file_list.txt 把需要编译的文件及其路径写入此文件
 
     - src/package/fileName.java
     - webRoot/fileName.jsp
