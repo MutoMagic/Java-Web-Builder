@@ -27,7 +27,7 @@
     name         | discription
     ------------ | -------------
     cfg.project.name   | 项目名称，这个属性最终会影响到你的包名（war包）
-    fg.project.webroot | webroot目录，这个我就不要多说了吧。用idea的盆友要注意了，有的时候我记得是web并不是eclipse中的webRoot
+    cfg.project.webroot | webroot目录，这个我就不要多说了吧。用idea的盆友要注意了，有的时候我记得是web并不是eclipse中的webRoot
     cfg.build.type     | build类型，full为全量build，incremental为增量编译
     cfg.build.encoding | 编码类型，这里都是UTF-8多好，为啥还要执迷不悟非要用个GBK（乱码什么的最讨厌了）
     cfg.build.tomcat   | tomcat的根目录，主要用来获取jsp-api.jar和servlet-api.jar
