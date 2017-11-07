@@ -25,13 +25,13 @@
 2.  设置build.properties，这东西一次修改，到处调试(雾)。有关build.properties的配置这里说明一下：
 
     name         | discription
-    ------------ | -------------
-    cfg.project.name   | 项目名称，这个属性最终会影响到你的包名（war包）
-    cfg.project.webroot | webroot目录，这个我就不要多说了吧。用idea的盆友要注意了，有的时候我记得是web并不是eclipse中的webRoot
-    cfg.build.type     | build类型，full为全量build，incremental为增量编译
-    cfg.build.encoding | 编码类型，这里都是UTF-8多好，为啥还要执迷不悟非要用个GBK（乱码什么的最讨厌了）
-    cfg.build.tomcat   | tomcat的根目录，主要用来获取jsp-api.jar和servlet-api.jar
-    cfg.build.output   | 输出目录，也就是最终war包所在地。需要留意的是，每次build都会在里面生成一个build.log日志文件
+    ------------ | ------------
+    cfg.project.name    | 项目名称，这个属性最终会影响到你的包名（war包）
+    cfg.project.webroot | webroot目录，这个我就不要多说了吧。用idea的盆友要注意了，有的时候我记得是web并不是eclipse中的webRoot
+    cfg.build.type      | build类型，full为全量build，incremental为增量编译
+    cfg.build.encoding  | 编码类型，这里都是UTF-8多好，为啥还要执迷不悟非要用个GBK（乱码什么的最讨厌了）
+    cfg.build.tomcat    | tomcat的根目录，主要用来获取jsp-api.jar和servlet-api.jar
+    cfg.build.output    | 输出目录，也就是最终war包所在地。需要留意的是，每次build都会在里面生成一个build.log日志文件
     
     注意：目录什么的推荐使用绝对路径，以避免不必要的问题。如果你觉得自己有充足的把握，相对路径（默认为项目的根目录）是你最好的选择。
 
